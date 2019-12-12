@@ -18,6 +18,7 @@ std::vector<std::string> paths;
 std::map<std::string, int> paths_h;
 
 std::map<std::string, EdgeMonitor*> edge_monitors;
+std::map<std::string, int> path_numbers;
 
 EmmisionMonitor emmision_monitor;
 

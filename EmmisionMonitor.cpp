@@ -2,6 +2,7 @@
 
 EmmisionMonitor::EmmisionMonitor() {
     float total_emmision = 0;
+    sem_init(&mutex, 0, 1);
 }
 
 void EmmisionMonitor::add_emmision(float partial_emmision) {

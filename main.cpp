@@ -58,7 +58,7 @@ void read_file(vector<string> &paths, map<string, int> &paths_h) {
             edge_monitors[new_edge] = new EdgeMonitor(paths_h[new_edge]);
         }
     }
-
+    int path_number = 1;
     while(getline(in_file, line)) {
         vector<string> parsed_line = split(line, '-');
         string new_line = make_path(parsed_line);
@@ -67,11 +67,12 @@ void read_file(vector<string> &paths, map<string, int> &paths_h) {
         for(int i = 0; i < n; i++) {
             paths.push_back(new_line);
         }
+        path_numbers[new_line] = path_number;
+        path_number++;
     }
 }
 /////////////////////////////////////////////////////////////////////
 void* start(void* _args) {
-
 
     //read arguments
     struct args_to_thread *args = (struct args_to_thread *)_args;
@@ -80,7 +81,7 @@ void* start(void* _args) {
 
     //open new file
     ofstream new_file;
-    new_file.open(string("outputs/") + (to_string(thread_number) + ".out").c_str());
+    new_file.open(string("outputs/") + to_string(path_numbers[path]) + "-" + (to_string(thread_number)).c_str());
 
     //send car through path
     int num_of_nodes = path.size() - 1;
@@ -88,7 +89,6 @@ void* start(void* _args) {
     for(int i = 0; i < num_of_nodes; i++) {
 
         string cur_edge = make_edge(path[i], path[i + 1]);
-        cout << cur_edge << endl;
 
         //write entrance node name
         new_file << path[i] << ", ";
@@ -98,6 +98,7 @@ void* start(void* _args) {
         
         int p = rand()%10 + 1; 
         float emmision = edge_monitors[cur_edge]->run(p);
+        emmision_monitor.add_emmision(emmision);
 
         //write exit node name
         new_file << path[i+1] << ", ";
@@ -106,12 +107,11 @@ void* start(void* _args) {
         new_file << time(nullptr) << ", ";
 
         //write path emmision in file
-        new_file << emmision;
-
+        new_file << emmision << ", ";
+        new_file << emmision_monitor.get_total_emmision();
         new_file << "\n";
     }
     new_file.close();
-
     pthread_exit(NULL);
 }
 /////////////////////////////////////////////////////////////////////
