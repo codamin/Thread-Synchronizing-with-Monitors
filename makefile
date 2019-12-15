@@ -15,4 +15,5 @@ $(BUILD_DIR)/EmmisionMonitor.o: EmmisionMonitor.cpp EmmisionMonitor.h
 	g++ -c EmmisionMonitor.cpp -o $(BUILD_DIR)/EmmisionMonitor.o
 
 program.out: $(BUILD_DIR)/main.o $(BUILD_DIR)/EdgeMonitor.o $(BUILD_DIR)/EmmisionMonitor.o
+	mkdir outputs
 	g++ -o program.out $(BUILD_DIR)/main.o $(BUILD_DIR)/EdgeMonitor.o $(BUILD_DIR)/EmmisionMonitor.o -pthread

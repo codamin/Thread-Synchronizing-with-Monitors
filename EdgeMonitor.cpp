@@ -1,8 +1,8 @@
 #include "EdgeMonitor.h"
 
-EdgeMonitor::EdgeMonitor(int _h) {
+EdgeMonitor::EdgeMonitor(int new_h) {
+    h = new_h;
     sem_init(&mutex, 0, 1);
-    h = _h;
 }
 
 long long EdgeMonitor::run(int p) {
