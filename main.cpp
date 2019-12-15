@@ -85,6 +85,7 @@ void* start(void* _args) {
 
     //send car through path
     int num_of_nodes = path.size() - 1;
+    int p = rand()%10 + 1; 
 
     for(int i = 0; i < num_of_nodes; i++) {
 
@@ -94,17 +95,18 @@ void* start(void* _args) {
         new_file << path[i] << ", ";
 
         //write entrance time
-        new_file << time(nullptr) << ", ";
+        new_file << std::chrono::duration_cast<std::chrono::milliseconds>
+         (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
         
-        int p = rand()%10 + 1; 
-        float emmision = edge_monitors[cur_edge]->run(p);
+        long long emmision = edge_monitors[cur_edge]->run(p);
         emmision_monitor.add_emmision(emmision);
 
         //write exit node name
         new_file << path[i+1] << ", ";
 
         //write exit time 
-        new_file << time(nullptr) << ", ";
+        new_file << std::chrono::duration_cast<std::chrono::milliseconds>
+         (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
 
         //write path emmision in file
         new_file << emmision << ", ";

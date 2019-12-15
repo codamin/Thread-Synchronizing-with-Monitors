@@ -11,6 +11,6 @@ class EdgeMonitor {
         int h;
     public:
         EdgeMonitor(int _h);
-        float run(int p);
+        long long run(int p);
 };
 #endif

@@ -5,11 +5,11 @@ EdgeMonitor::EdgeMonitor(int _h) {
     h = _h;
 }
 
-float EdgeMonitor::run(int p) {
+long long EdgeMonitor::run(int p) {
     sem_wait(&mutex);
-    float emmision;
-    float divisor = p * h * 1e6;
-    for(int k = 0; k < 3 * 1e8; k++) {
+    long long emmision = 0;
+    long long divisor = p * h * 1e6;
+    for(int k = 0; k <= 1e7; k++) {
         emmision += k/divisor;
     }
     sem_post(&mutex);

@@ -8,11 +8,11 @@ class EmmisionMonitor {
 
     private:
         sem_t mutex;
-        float total_emmision;
+        long long total_emmision;
     public:
         EmmisionMonitor();
-        void add_emmision(float partial_emmision);
-        float get_total_emmision();
+        void add_emmision(long long partial_emmision);
+        long long get_total_emmision();
 };
 
 #endif
