@@ -3,6 +3,7 @@
 
 #include <thread>
 #include <semaphore.h>
+#include <fstream>
 
 class EdgeMonitor {
 
@@ -11,6 +12,6 @@ class EdgeMonitor {
         int h;
     public:
         EdgeMonitor(int _h);
-        long long run(int p);
+        long long run(std::ofstream &new_file, int p);
 };
 #endif

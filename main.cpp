@@ -95,18 +95,17 @@ void* start(void* _args) {
         new_file << path[i] << ", ";
 
         //write entrance time
-        new_file << std::chrono::duration_cast<std::chrono::milliseconds>
-         (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
+        // new_file << std::chrono::duration_cast<std::chrono::milliseconds>
+        //  (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
         
-        long long emmision = edge_monitors[cur_edge]->run(p);
+        long long emmision = edge_monitors[cur_edge]->run(new_file, p);
         emmision_monitor.add_emmision(emmision);
 
         //write exit node name
         new_file << path[i+1] << ", ";
 
         //write exit time 
-        new_file << std::chrono::duration_cast<std::chrono::milliseconds>
-         (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
+
 
         //write path emmision in file
         new_file << emmision << ", ";
