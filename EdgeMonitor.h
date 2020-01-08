@@ -12,6 +12,6 @@ class EdgeMonitor {
         int h;
     public:
         EdgeMonitor(int _h);
-        long long run(std::ofstream &new_file, int p);
+        long long run(char c, std::ofstream &new_file, int p);
 };
 #endif

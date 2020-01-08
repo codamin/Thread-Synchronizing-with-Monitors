@@ -7,7 +7,7 @@ EdgeMonitor::EdgeMonitor(int new_h) {
     sem_init(&mutex, 0, 1);
 }
 
-long long EdgeMonitor::run(ofstream &new_file, int p) {
+long long EdgeMonitor::run(char c, ofstream &new_file, int p) {
     sem_wait(&mutex);
 
     new_file << std::chrono::duration_cast<std::chrono::milliseconds>
@@ -18,6 +18,8 @@ long long EdgeMonitor::run(ofstream &new_file, int p) {
     for(int k = 0; k <= 1e7; k++) {
         emmision += k/divisor;
     }
+
+    new_file << c << ", ";
 
     new_file << std::chrono::duration_cast<std::chrono::milliseconds>
     (std::chrono::system_clock::now().time_since_epoch()).count() << ", ";
